@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alerta de Incendios</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header><h1>🔥 Alerta de Incendios</h1></header>
+  <header>
+    <h1>🌲 Sistema de Alerta de Incendios</h1>
+  </header>
 
   <main>
-    <section id="info" class="card">
-      <h2>Clima actual</h2>
-      <p>Temp: <span id="temp">--</span>°C</p>
-      <p>Hum:  <span id="hum">--</span>%</p>
+    <section class="info">
+      <h2>🌡️ Temperatura Actual</h2>
+      <p><strong>Temperatura:</strong> <span id="temp">Cargando...</span></p>
+      <p><strong>Humedad:</strong> <span id="hum">Cargando...</span></p>
+      <p><strong>Última Actualización:</strong> <span id="time">Cargando...</span></p>
     </section>
 
-    <section class="card">
-      <h2>Últimos 7 días</h2>
-      <canvas id="grafico" width="300" height="200"></canvas>
+    <section class="grafica">
+      <h2>📊 Historial de Temperaturas</h2>
+      <canvas id="tempChart" width="600" height="300"></canvas>
     </section>
   </main>
 
-  <script src="script.js" type="module"></script>
+  <footer>
+    <p>Desarrollado para la detección temprana de incendios</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,39 +1,55 @@
-const apiKey = 'TU_API_KEY_OPENWEATHER';
-const ciudad = 'Manzanillo,mx';
+const tempEl = document.getElementById('temp');
+const humEl = document.getElementById('hum');
+const timeEl = document.getElementById('time');
 
-const tempSpot = document.getElementById('temp');
-const humSpot  = document.getElementById('hum');
+// 🔄 Función para actualizar los datos en tiempo real
+async function fetchData() {
+  try {
+    const response = await fetch('https://alertaincendio-b946e.firebaseio.com/clima.json');
+    const data = await response.json();
+    const last = Object.values(data).pop();
 
-async function climaActual() {
-  const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}&units=metric`);
-  const data = await res.json();
-  tempSpot.textContent = data.main.temp;
-  humSpot.textContent  = data.main.humidity;
+    tempEl.textContent = last.temperatura + " °C";
+    humEl.textContent = last.humedad + " %";
+    timeEl.textContent = new Date(last.timestamp).toLocaleString();
+  } catch (e) {
+    tempEl.textContent = "Error";
+    humEl.textContent = "Error";
+    timeEl.textContent = "Error";
+    console.error("Error al consultar Firebase:", e);
+  }
 }
-await climaActual();     // primera carga
-setInterval(climaActual, 60_000); // actualizar cada minuto
 
-/* === Gráfica últimas 7 d === */
-const ctx = document.getElementById('grafico');
-const labels = [];
-const values = [];
-const chart = new Chart(ctx,{
-  type:'line',
-  data:{labels, datasets:[{label:'Temp °C', data:values, borderColor:'#b91c1c', tension:.2}]},
-  options:{scales:{y:{beginAtZero:false}}}
-});
+// ⏱️ Actualiza cada 10 segundos
+setInterval(fetchData, 10000);
+fetchData();
 
-// Traer datos de Firebase REST (public rules modo demo)
-async function loadHistorico(){
-  const url = 'https://firestore.googleapis.com/v1/projects/alertaincendio-b946e/databases/(default)/documents/registros';
-  const res = await fetch(url);
-  const json = await res.json();
-  const rows=json.documents||[];
-  rows.sort((a,b)=>new Date(a.fields.fecha.stringValue)-new Date(b.fields.fecha.stringValue));
-  rows.slice(-168).forEach(doc=>{
-    labels.push(new Date(doc.fields.fecha.stringValue).toLocaleTimeString());
-    values.push(doc.fields.temperatura.doubleValue||doc.fields.temperatura.integerValue);
-  });
-  chart.update();
+// 📈 Dibuja la gráfica de temperatura
+async function drawChart() {
+  try {
+    const response = await fetch('https://alertaincendio-b946e.firebaseio.com/clima.json');
+    const data = await response.json();
+    const values = Object.values(data);
+    const labels = values.map(e => new Date(e.timestamp).toLocaleDateString());
+    const temps = values.map(e => e.temperatura);
+
+    const ctx = document.getElementById('tempChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Temperatura (°C)',
+          data: temps,
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      }
+    });
+  } catch (e) {
+    console.error("Error al cargar gráfica:", e);
+  }
 }
-loadHistorico();
+
+drawChart();
