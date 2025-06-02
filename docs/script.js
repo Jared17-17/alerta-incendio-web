@@ -1,3 +1,4 @@
+
 const tempEl = document.getElementById('temp');
 const humEl = document.getElementById('hum');
 const timeEl = document.getElementById('time');
@@ -7,7 +8,10 @@ async function fetchData() {
   try {
     const response = await fetch('https://alertaincendio-b946e.firebaseio.com/clima.json');
     const data = await response.json();
+    if (!data || Object.keys(data).length === 0) throw new Error("No hay datos en la base de datos.");
+
     const last = Object.values(data).pop();
+    if (!last || !last.temperatura || !last.humedad || !last.timestamp) throw new Error("Datos incompletos.");
 
     tempEl.textContent = last.temperatura + " °C";
     humEl.textContent = last.humedad + " %";
@@ -20,36 +24,5 @@ async function fetchData() {
   }
 }
 
-// ⏱️ Actualiza cada 10 segundos
 setInterval(fetchData, 10000);
 fetchData();
-
-// 📈 Dibuja la gráfica de temperatura
-async function drawChart() {
-  try {
-    const response = await fetch('https://alertaincendio-b946e.firebaseio.com/clima.json');
-    const data = await response.json();
-    const values = Object.values(data);
-    const labels = values.map(e => new Date(e.timestamp).toLocaleDateString());
-    const temps = values.map(e => e.temperatura);
-
-    const ctx = document.getElementById('tempChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Temperatura (°C)',
-          data: temps,
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]
-      }
-    });
-  } catch (e) {
-    console.error("Error al cargar gráfica:", e);
-  }
-}
-
-drawChart();
