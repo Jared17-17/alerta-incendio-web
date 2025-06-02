@@ -1,0 +1,1 @@
+// JavaScript to update temperature in real time

@@ -1,0 +1,4 @@
+body{font-family:sans-serif;background:#f4f4f4;margin:0;text-align:center}
+header{background:#b91c1c;color:#fff;padding:1rem}
+main{display:flex;flex-direction:column;align-items:center;gap:1.5rem;margin:2rem}
+.card{background:#fff;padding:1rem 2rem;border-radius:8px;box-shadow:0 0 8px #ccc;width:320px}

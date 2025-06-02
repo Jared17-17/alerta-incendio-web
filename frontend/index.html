@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alerta de Incendios</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header><h1>🔥 Alerta de Incendios</h1></header>
+
+  <main>
+    <section id="info" class="card">
+      <h2>Clima actual</h2>
+      <p>Temp: <span id="temp">--</span>°C</p>
+      <p>Hum:  <span id="hum">--</span>%</p>
+    </section>
+
+    <section class="card">
+      <h2>Últimos 7 días</h2>
+      <canvas id="grafico" width="300" height="200"></canvas>
+    </section>
+  </main>
+
+  <script src="script.js" type="module"></script>
+</body>
+</html>
