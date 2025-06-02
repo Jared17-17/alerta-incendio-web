@@ -3,31 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alerta de Incendios</title>
+  <title>Dashboard | Alerta de Incendios</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
-    <h1>🌲 Sistema de Alerta de Incendios</h1>
+    <h1>🔥 Sistema de Monitoreo Climático en Tiempo Real</h1>
   </header>
 
   <main>
     <section class="info">
-      <h2>🌡️ Temperatura Actual</h2>
-      <p><strong>Temperatura:</strong> <span id="temp">Cargando...</span></p>
-      <p><strong>Humedad:</strong> <span id="hum">Cargando...</span></p>
-      <p><strong>Última Actualización:</strong> <span id="time">Cargando...</span></p>
+      <h2>Datos Actuales</h2>
+      <div class="data-grid">
+        <div class="data-card">
+          <p class="label">🌡️ Temperatura</p>
+          <p class="value" id="temp">-- °C</p>
+        </div>
+        <div class="data-card">
+          <p class="label">💧 Humedad</p>
+          <p class="value" id="hum">-- %</p>
+        </div>
+        <div class="data-card">
+          <p class="label">🕒 Última Actualización</p>
+          <p class="value" id="time">--</p>
+        </div>
+      </div>
     </section>
 
     <section class="grafica">
       <h2>📊 Historial de Temperaturas</h2>
-      <canvas id="tempChart" width="600" height="300"></canvas>
+      <canvas id="tempChart"></canvas>
     </section>
   </main>
 
   <footer>
-    <p>Desarrollado para la detección temprana de incendios</p>
+    <p>Desarrollado para la detección temprana de incendios en Manzanillo</p>
   </footer>
 
   <script src="script.js"></script>

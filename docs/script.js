@@ -3,10 +3,9 @@ const tempEl = document.getElementById('temp');
 const humEl = document.getElementById('hum');
 const timeEl = document.getElementById('time');
 
-// 🔄 Función para actualizar los datos en tiempo real
 async function fetchData() {
   try {
-    const response = await fetch('https://alertaincendio-b946e.firebaseio.com/clima.json');
+    const response = await fetch('https://alertaincendio-b946e-default-rtdb.firebaseio.com/clima.json');
     const data = await response.json();
     if (!data || Object.keys(data).length === 0) throw new Error("No hay datos en la base de datos.");
 

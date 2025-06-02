@@ -23,9 +23,10 @@ body {
 header {
   background-color: var(--accent);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1.2rem;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-size: 1.5rem;
 }
 
 main {
@@ -33,7 +34,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -41,29 +42,47 @@ main {
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.3s ease;
-}
-
-.info:hover {
-  transform: translateY(-3px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .info h2 {
   margin-bottom: 1rem;
   color: var(--accent);
+  font-size: 1.4rem;
 }
 
-.info p {
+.data-grid {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.data-card {
+  flex: 1 1 30%;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.data-card .label {
   font-size: 1.1rem;
-  margin-bottom: 0.6rem;
+  color: #475569;
+}
+
+.data-card .value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
 }
 
 .grafica {
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .grafica h2 {
@@ -82,7 +101,6 @@ footer {
   padding: 1rem;
   background-color: #e2e8f0;
   color: #334155;
-  margin-top: 2rem;
   font-size: 0.9rem;
   border-top: 1px solid #cbd5e1;
 }
